@@ -37,10 +37,10 @@ class Ui_MainWindow(object):
         self.frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout = QVBoxLayout(self.frame)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.stackedWidget = QStackedWidget(self.frame)
-        self.stackedWidget.setObjectName(u"stackedWidget")
-        sizePolicy.setHeightForWidth(self.stackedWidget.sizePolicy().hasHeightForWidth())
-        self.stackedWidget.setSizePolicy(sizePolicy)
+        self.Paginas = QStackedWidget(self.frame)
+        self.Paginas.setObjectName(u"Paginas")
+        sizePolicy.setHeightForWidth(self.Paginas.sizePolicy().hasHeightForWidth())
+        self.Paginas.setSizePolicy(sizePolicy)
         self.pag_Estoque = QWidget()
         self.pag_Estoque.setObjectName(u"pag_Estoque")
         sizePolicy.setHeightForWidth(self.pag_Estoque.sizePolicy().hasHeightForWidth())
@@ -93,7 +93,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.frame_3)
 
-        self.stackedWidget.addWidget(self.pag_Estoque)
+        self.Paginas.addWidget(self.pag_Estoque)
         self.pag_addAlim = QWidget()
         self.pag_addAlim.setObjectName(u"pag_addAlim")
         sizePolicy.setHeightForWidth(self.pag_addAlim.sizePolicy().hasHeightForWidth())
@@ -203,7 +203,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addWidget(self.frame_4)
 
-        self.stackedWidget.addWidget(self.pag_addAlim)
+        self.Paginas.addWidget(self.pag_addAlim)
         self.pag_contabilizando = QWidget()
         self.pag_contabilizando.setObjectName(u"pag_contabilizando")
         sizePolicy.setHeightForWidth(self.pag_contabilizando.sizePolicy().hasHeightForWidth())
@@ -288,7 +288,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.frame_7)
 
-        self.stackedWidget.addWidget(self.pag_contabilizando)
+        self.Paginas.addWidget(self.pag_contabilizando)
         self.pag_excluirAlim = QWidget()
         self.pag_excluirAlim.setObjectName(u"pag_excluirAlim")
         sizePolicy.setHeightForWidth(self.pag_excluirAlim.sizePolicy().hasHeightForWidth())
@@ -359,19 +359,19 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_14.addWidget(self.frame_11)
 
-        self.stackedWidget.addWidget(self.pag_excluirAlim)
+        self.Paginas.addWidget(self.pag_excluirAlim)
 
-        self.verticalLayout.addWidget(self.stackedWidget)
+        self.verticalLayout.addWidget(self.Paginas)
 
-        self.frame_2 = QFrame(self.frame)
-        self.frame_2.setObjectName(u"frame_2")
-        sizePolicy.setHeightForWidth(self.frame_2.sizePolicy().hasHeightForWidth())
-        self.frame_2.setSizePolicy(sizePolicy)
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout = QHBoxLayout(self.frame_2)
+        self.Botoes = QFrame(self.frame)
+        self.Botoes.setObjectName(u"Botoes")
+        sizePolicy.setHeightForWidth(self.Botoes.sizePolicy().hasHeightForWidth())
+        self.Botoes.setSizePolicy(sizePolicy)
+        self.Botoes.setFrameShape(QFrame.StyledPanel)
+        self.Botoes.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout = QHBoxLayout(self.Botoes)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.btn_addAlim = QPushButton(self.frame_2)
+        self.btn_addAlim = QPushButton(self.Botoes)
         self.btn_addAlim.setObjectName(u"btn_addAlim")
         font8 = QFont()
         font8.setFamily(u"Courier New")
@@ -382,7 +382,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.btn_addAlim)
 
-        self.btn_ExcluirAlim = QPushButton(self.frame_2)
+        self.btn_ExcluirAlim = QPushButton(self.Botoes)
         self.btn_ExcluirAlim.setObjectName(u"btn_ExcluirAlim")
         font9 = QFont()
         font9.setFamily(u"Courier New")
@@ -394,20 +394,20 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.btn_ExcluirAlim)
 
-        self.btn_contGastos = QPushButton(self.frame_2)
+        self.btn_contGastos = QPushButton(self.Botoes)
         self.btn_contGastos.setObjectName(u"btn_contGastos")
         self.btn_contGastos.setFont(font8)
 
         self.horizontalLayout.addWidget(self.btn_contGastos)
 
-        self.btn_visualizar = QPushButton(self.frame_2)
+        self.btn_visualizar = QPushButton(self.Botoes)
         self.btn_visualizar.setObjectName(u"btn_visualizar")
         self.btn_visualizar.setFont(font8)
 
         self.horizontalLayout.addWidget(self.btn_visualizar)
 
 
-        self.verticalLayout.addWidget(self.frame_2)
+        self.verticalLayout.addWidget(self.Botoes)
 
 
         self.verticalLayout_2.addWidget(self.frame)
@@ -416,7 +416,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.Paginas.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)

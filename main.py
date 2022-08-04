@@ -3,11 +3,14 @@ from PySide2.QtWidgets import QApplication, QMainWindow, QFrame
 from ui_pag_principal import Ui_MainWindow
 import sys
 
-class AbrirEstoque(QWidget, Ui_MainWindow):
+class AbrirEstoque(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(AbrirEstoque, self).__init__()
         self.setupUi(self)
         self.setWindowTitle("Estoque mais para mais que para menos")
+
+        self.btn_ExcluirAlim.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_excluirAlim))
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
@@ -16,4 +19,3 @@ if __name__ == "__main__":
     openEst.setupUi(janela)
     janela.show()
     sys.exit(app.exec_())
- 
