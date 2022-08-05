@@ -373,6 +373,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.btn_addAlim = QPushButton(self.Botoes)
         self.btn_addAlim.setObjectName(u"btn_addAlim")
+        self.btn_addAlim.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_addAlim))
         font8 = QFont()
         font8.setFamily(u"Courier New")
         font8.setPointSize(6)
@@ -384,6 +385,7 @@ class Ui_MainWindow(object):
 
         self.btn_ExcluirAlim = QPushButton(self.Botoes)
         self.btn_ExcluirAlim.setObjectName(u"btn_ExcluirAlim")
+        self.btn_ExcluirAlim.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_excluirAlim))
         font9 = QFont()
         font9.setFamily(u"Courier New")
         font9.setPointSize(6)
@@ -396,12 +398,14 @@ class Ui_MainWindow(object):
 
         self.btn_contGastos = QPushButton(self.Botoes)
         self.btn_contGastos.setObjectName(u"btn_contGastos")
+        self.btn_contGastos.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_contabilizando))
         self.btn_contGastos.setFont(font8)
 
         self.horizontalLayout.addWidget(self.btn_contGastos)
 
         self.btn_visualizar = QPushButton(self.Botoes)
         self.btn_visualizar.setObjectName(u"btn_visualizar")
+        self.btn_visualizar.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_Estoque))
         self.btn_visualizar.setFont(font8)
 
         self.horizontalLayout.addWidget(self.btn_visualizar)
