@@ -1,0 +1,7 @@
+Função para adicionar os alimentos do banco/estoque ao clicar no botão.
+
+Função para adicionar o que foi gasto no dia, para atualizar o estoque.
+
+Função para excluir um alimento.
+
+A tabela com os pratos, cada prato com uma determinada porção de cada alimento, acho que para ser mais simples não precisa ser adicionado esses pratos, a gente já deixa eles como parte do banco para ser usado.
