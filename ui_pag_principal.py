@@ -186,7 +186,7 @@ class Ui_MainWindow(object):
 
         self.btn_adicionaAlim = QPushButton(self.frame_6)
         self.btn_adicionaAlim.setObjectName(u"btn_adicionaAlim")
-        self.btn_adicionaAlim.clicked.connect(lambda: action.addAlimento())
+        self.btn_adicionaAlim.clicked.connect(lambda: action.addAlimento(self.ent_codAlim.text(), self.ent_nomeAlim.text(),self.ent_qAtual.text(),self.ent_qMin.text(), self.ent_qMax.text()))
         font5 = QFont()
         font5.setFamily(u"Courier New")
         font5.setBold(True)
@@ -273,7 +273,7 @@ class Ui_MainWindow(object):
 
         self.btn_contabilizar = QPushButton(self.frame_10)
         self.btn_contabilizar.setObjectName(u"btn_contabilizar")
-        self.btn_contabilizar.clicked.connect(lambda: action.contabilizarGastos())
+        self.btn_contabilizar.clicked.connect(lambda: action.contabilizarGastos(self.ent_prato.text(), self.ent_qPratos.text()))
         self.btn_contabilizar.setFont(font5)
 
         self.verticalLayout_10.addWidget(self.btn_contabilizar)
@@ -351,7 +351,7 @@ class Ui_MainWindow(object):
 
         self.btn_excluir = QPushButton(self.frame_13)
         self.btn_excluir.setObjectName(u"btn_excluir")
-        self.btn_excluir.clicked.connect(lambda: action.excluirAlimento())
+        self.btn_excluir.clicked.connect(lambda: action.excluirAlimento(self.exc_codAlim.text(),self.exc_nomeAlim.text()))
         self.btn_excluir.setFont(font5)
 
         self.verticalLayout_17.addWidget(self.btn_excluir)
