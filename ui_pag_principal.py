@@ -12,6 +12,9 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 from functionSystem import action
+from functionSystem import Estoque
+estoque = Estoque()
+dados = estoque.listaDados()
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -63,8 +66,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.addWidget(self.label)
 
         self.tab_estoque = QTableWidget(self.frame_3)
-        if (self.tab_estoque.columnCount() < 5):
-            self.tab_estoque.setColumnCount(5)
+        self.tab_estoque.setRowCount(len(dados))
+        self.tab_estoque.setColumnCount(5)
+        for i in range(0, len(dados)):
+            for j in range(0,5):
+                self.tab_estoque.setItem(i, j, QTableWidgetItem(str(dados[i][j])))             
+
         font1 = QFont()
         font1.setFamily(u"Courier New")
         font1.setPointSize(7)

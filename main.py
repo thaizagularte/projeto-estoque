@@ -1,12 +1,6 @@
-from PySide2.QtWidgets import (QApplication, QMainWindow, QWidget, QPushButton)
+from PySide2.QtWidgets import (QApplication, QMainWindow)
 from ui_pag_principal import Ui_MainWindow
 import sys
-
-class AbrirEstoque(QWidget, Ui_MainWindow):
-    def __init__(self):
-        super(AbrirEstoque, self).__init__()
-        self.setupUi(self)
-        self.setWindowTitle("Estoque mais para mais que para menos")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
