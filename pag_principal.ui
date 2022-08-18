@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>585</width>
-    <height>437</height>
+    <height>444</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,7 +26,7 @@
      <verstretch>0</verstretch>
     </sizepolicy>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
      <widget class="QFrame" name="frame">
       <property name="sizePolicy">
@@ -74,24 +74,54 @@
                <widget class="QLabel" name="label">
                 <property name="font">
                  <font>
-                  <family>Courier New</family>
-                  <pointsize>14</pointsize>
+                  <family>Century</family>
+                  <pointsize>15</pointsize>
                  </font>
                 </property>
                 <property name="text">
                  <string>Estoque Mais para mais que para menos</string>
                 </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
                </widget>
               </item>
               <item>
                <widget class="QTableWidget" name="tab_estoque">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <family>Century</family>
+                  <pointsize>10</pointsize>
+                 </font>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarAsNeeded</enum>
+                </property>
+                <property name="sizeAdjustPolicy">
+                 <enum>QAbstractScrollArea::AdjustToContents</enum>
+                </property>
+                <property name="showGrid">
+                 <bool>true</bool>
+                </property>
+                <property name="sortingEnabled">
+                 <bool>false</bool>
+                </property>
                 <column>
                  <property name="text">
                   <string>Cod Alimento</string>
                  </property>
                  <property name="font">
                   <font>
-                   <family>Courier New</family>
+                   <family>Century</family>
                    <pointsize>7</pointsize>
                   </font>
                  </property>
@@ -102,7 +132,7 @@
                  </property>
                  <property name="font">
                   <font>
-                   <family>Courier</family>
+                   <family>Century</family>
                    <pointsize>6</pointsize>
                   </font>
                  </property>
@@ -113,7 +143,7 @@
                  </property>
                  <property name="font">
                   <font>
-                   <family>Courier New</family>
+                   <family>Century</family>
                    <pointsize>7</pointsize>
                   </font>
                  </property>
@@ -124,7 +154,7 @@
                  </property>
                  <property name="font">
                   <font>
-                   <family>Courier New</family>
+                   <family>Century</family>
                    <pointsize>7</pointsize>
                   </font>
                  </property>
@@ -135,7 +165,7 @@
                  </property>
                  <property name="font">
                   <font>
-                   <family>Courier New</family>
+                   <family>Century</family>
                    <pointsize>7</pointsize>
                   </font>
                  </property>
@@ -177,12 +207,15 @@
                   <widget class="QLabel" name="label_2">
                    <property name="font">
                     <font>
-                     <family>Courier New</family>
+                     <family>Century</family>
                      <pointsize>15</pointsize>
                     </font>
                    </property>
                    <property name="text">
                     <string>Adicione o novo alimento</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -199,7 +232,7 @@
                      <widget class="QLabel" name="label_3">
                       <property name="font">
                        <font>
-                        <family>Courier New</family>
+                        <family>Century</family>
                        </font>
                       </property>
                       <property name="text">
@@ -214,7 +247,7 @@
                      <widget class="QLabel" name="label_4">
                       <property name="font">
                        <font>
-                        <family>Courier New</family>
+                        <family>Century</family>
                        </font>
                       </property>
                       <property name="text">
@@ -229,7 +262,7 @@
                      <widget class="QLabel" name="label_5">
                       <property name="font">
                        <font>
-                        <family>Courier New</family>
+                        <family>Century</family>
                        </font>
                       </property>
                       <property name="text">
@@ -244,7 +277,7 @@
                      <widget class="QLabel" name="label_6">
                       <property name="font">
                        <font>
-                        <family>Courier New</family>
+                        <family>Century</family>
                        </font>
                       </property>
                       <property name="text">
@@ -259,7 +292,7 @@
                      <widget class="QLabel" name="label_7">
                       <property name="font">
                        <font>
-                        <family>Courier New</family>
+                        <family>Century</family>
                        </font>
                       </property>
                       <property name="text">
@@ -274,7 +307,7 @@
                      <widget class="QPushButton" name="btn_adicionaAlim">
                       <property name="font">
                        <font>
-                        <family>Courier New</family>
+                        <family>Century</family>
                         <weight>75</weight>
                         <bold>true</bold>
                        </font>
@@ -295,7 +328,7 @@
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="pag_contabilizando">
+         <widget class="QWidget" name="pag_atualizando">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -334,12 +367,15 @@
                      <widget class="QLabel" name="label_8">
                       <property name="font">
                        <font>
-                        <family>Courier New</family>
+                        <family>Century</family>
                         <pointsize>13</pointsize>
                        </font>
                       </property>
                       <property name="text">
-                       <string>Contabilizando gastos no Estoque</string>
+                       <string>Atualizando a quantidade no Estoque</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -357,48 +393,60 @@
                       <property name="frameShadow">
                        <enum>QFrame::Raised</enum>
                       </property>
-                      <layout class="QVBoxLayout" name="verticalLayout_10">
+                      <layout class="QVBoxLayout" name="verticalLayout_4">
                        <item>
                         <widget class="QLabel" name="label_9">
                          <property name="font">
                           <font>
-                           <family>Courier New</family>
+                           <family>Century</family>
                           </font>
                          </property>
                          <property name="text">
-                          <string>Prato vendido</string>
+                          <string>Código do alimento</string>
                          </property>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QLineEdit" name="ent_prato"/>
+                        <widget class="QLineEdit" name="ent_codA"/>
                        </item>
                        <item>
                         <widget class="QLabel" name="label_10">
                          <property name="font">
                           <font>
-                           <family>Courier New</family>
+                           <family>Century</family>
                           </font>
                          </property>
                          <property name="text">
-                          <string>Quantidade de pratos</string>
+                          <string>Quantidade</string>
                          </property>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QLineEdit" name="ent_qPratos"/>
+                        <widget class="QLineEdit" name="ent_quant"/>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="btn_contabilizar">
+                        <widget class="QPushButton" name="btn_aumentar">
                          <property name="font">
                           <font>
-                           <family>Courier New</family>
-                           <weight>75</weight>
-                           <bold>true</bold>
+                           <family>Century</family>
                           </font>
                          </property>
                          <property name="text">
-                          <string>Contabilizar</string>
+                          <string>Aumentar</string>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QPushButton" name="btn_diminuir">
+                         <property name="font">
+                          <font>
+                           <family>Century</family>
+                           <weight>50</weight>
+                           <bold>false</bold>
+                          </font>
+                         </property>
+                         <property name="text">
+                          <string>Diminuir</string>
                          </property>
                         </widget>
                        </item>
@@ -446,12 +494,18 @@
                   <widget class="QLabel" name="label_11">
                    <property name="font">
                     <font>
-                     <family>Courier New</family>
+                     <family>Century</family>
                      <pointsize>12</pointsize>
                     </font>
                    </property>
                    <property name="text">
                     <string>Excluir alimento do Estoque</string>
+                   </property>
+                   <property name="textFormat">
+                    <enum>Qt::AutoText</enum>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -471,7 +525,7 @@
                   <widget class="QLabel" name="label_12">
                    <property name="font">
                     <font>
-                     <family>Courier New</family>
+                     <family>Century</family>
                     </font>
                    </property>
                    <property name="text">
@@ -486,7 +540,7 @@
                   <widget class="QLabel" name="label_13">
                    <property name="font">
                     <font>
-                     <family>Courier New</family>
+                     <family>Century</family>
                     </font>
                    </property>
                    <property name="text">
@@ -540,10 +594,10 @@
            <widget class="QPushButton" name="btn_addAlim">
             <property name="font">
              <font>
-              <family>Courier New</family>
-              <pointsize>6</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
+              <family>Century</family>
+              <pointsize>8</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
             </property>
             <property name="text">
@@ -555,11 +609,11 @@
            <widget class="QPushButton" name="btn_ExcluirAlim">
             <property name="font">
              <font>
-              <family>Courier New</family>
-              <pointsize>6</pointsize>
-              <weight>75</weight>
+              <family>Century</family>
+              <pointsize>8</pointsize>
+              <weight>50</weight>
               <italic>false</italic>
-              <bold>true</bold>
+              <bold>false</bold>
              </font>
             </property>
             <property name="text">
@@ -568,17 +622,17 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="btn_contGastos">
+           <widget class="QPushButton" name="btn_Atualizar">
             <property name="font">
              <font>
-              <family>Courier New</family>
-              <pointsize>6</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
+              <family>Century</family>
+              <pointsize>8</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
             </property>
             <property name="text">
-             <string>Contabilizar os gastos</string>
+             <string>Atualizar Estoque</string>
             </property>
            </widget>
           </item>
@@ -586,10 +640,10 @@
            <widget class="QPushButton" name="btn_visualizar">
             <property name="font">
              <font>
-              <family>Courier New</family>
-              <pointsize>6</pointsize>
-              <weight>75</weight>
-              <bold>true</bold>
+              <family>Century</family>
+              <pointsize>8</pointsize>
+              <weight>50</weight>
+              <bold>false</bold>
              </font>
             </property>
             <property name="text">

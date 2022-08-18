@@ -1,26 +1,61 @@
-# -*- coding: utf-8 -*-
-
-################################################################################
-## Form generated from reading UI file 'pag_principal.ui'
-##
-## Created by: Qt User Interface Compiler version 5.15.2
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
-
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
-from functionSystem import action
-from functionSystem import Estoque
+import sqlite3
+
+class action:
+    #Função adicionar alimento no estoque/Banco de dados
+    def addAlimento(self,cod, nome, atual, min, max):
+        banco = sqlite3.connect('estoque.db')
+        cursor = banco.cursor()
+        cursor.execute("INSERT INTO Alimentos VALUES("+cod+",'"+nome+"', "+atual+", "+max+", "+min+")")
+        banco.commit()
+        banco.close()
+
+    #Função para atualizar as quantidades dos alimentos 
+    def Aumentar(cod, quant):#aumentado a quantidade
+        banco = sqlite3.connect('estoque.db')
+        cursor = banco.cursor()
+        cursor.execute("UPDATE Alimentos SET quantAtual = quantAtual + "+quant+ " WHERE codAlim = "+cod+"")
+        banco.commit()
+        banco.close()
+
+    def Diminuir(cod,quant):#diminuindo a quantidade
+        banco = sqlite3.connect('estoque.db')
+        cursor = banco.cursor()
+        cursor.execute("UPDATE Alimentos SET quantAtual = quantAtual - "+quant+" WHERE codAlim = "+cod+"")
+        banco.commit()
+        banco.close()    
+
+    #Função para excluir um alimento do estoque
+    def excluirAlimento(cod, nome):
+        banco = sqlite3.connect('estoque.db')
+        cursor = banco.cursor()
+        cursor.execute("DELETE from Alimentos WHERE codAlim = "+cod+"")
+        banco.commit()
+        banco.close()
+
+#Classe para mostrar os dados do banco na tabela interface
+class Estoque:
+    def __init__(self):
+        banco = sqlite3.connect('estoque.db')
+        cursor = banco.cursor()
+        cursor.execute("SELECT * FROM Alimentos")
+        self.lista = cursor.fetchall()
+        banco.close()
+
+    def listaDados(self):
+        return self.lista
+
+
 estoque = Estoque()
 dados = estoque.listaDados()
-
+#Código da interface
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(585, 437)
+        MainWindow.resize(585, 444)
         sizePolicy = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -30,16 +65,16 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         sizePolicy.setHeightForWidth(self.centralwidget.sizePolicy().hasHeightForWidth())
         self.centralwidget.setSizePolicy(sizePolicy)
-        self.verticalLayout_2 = QVBoxLayout(self.centralwidget)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.horizontalLayout_2 = QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.frame = QFrame(self.centralwidget)
         self.frame.setObjectName(u"frame")
         sizePolicy.setHeightForWidth(self.frame.sizePolicy().hasHeightForWidth())
         self.frame.setSizePolicy(sizePolicy)
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
-        self.verticalLayout = QVBoxLayout(self.frame)
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalLayout_3 = QVBoxLayout(self.frame)
+        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.Paginas = QStackedWidget(self.frame)
         self.Paginas.setObjectName(u"Paginas")
         sizePolicy.setHeightForWidth(self.Paginas.sizePolicy().hasHeightForWidth())
@@ -48,38 +83,40 @@ class Ui_MainWindow(object):
         self.pag_Estoque.setObjectName(u"pag_Estoque")
         sizePolicy.setHeightForWidth(self.pag_Estoque.sizePolicy().hasHeightForWidth())
         self.pag_Estoque.setSizePolicy(sizePolicy)
-        self.verticalLayout_3 = QVBoxLayout(self.pag_Estoque)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.horizontalLayout_4 = QHBoxLayout(self.pag_Estoque)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.frame_3 = QFrame(self.pag_Estoque)
         self.frame_3.setObjectName(u"frame_3")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_4 = QVBoxLayout(self.frame_3)
-        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
+        self.verticalLayout = QVBoxLayout(self.frame_3)
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.label = QLabel(self.frame_3)
         self.label.setObjectName(u"label")
         font = QFont()
-        font.setFamily(u"Courier New")
-        font.setPointSize(14)
+        font.setFamily(u"Century")
+        font.setPointSize(15)
         self.label.setFont(font)
+        self.label.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_4.addWidget(self.label)
+        self.verticalLayout.addWidget(self.label)
 
         self.tab_estoque = QTableWidget(self.frame_3)
         self.tab_estoque.setRowCount(len(dados))
         self.tab_estoque.setColumnCount(5)
+        # Mostra os dados do banco na tabela da interface 
         for i in range(0, len(dados)):
             for j in range(0,5):
-                self.tab_estoque.setItem(i, j, QTableWidgetItem(str(dados[i][j])))             
+                self.tab_estoque.setItem(i, j, QTableWidgetItem(str(dados[i][j])))
 
         font1 = QFont()
-        font1.setFamily(u"Courier New")
+        font1.setFamily(u"Century")
         font1.setPointSize(7)
         __qtablewidgetitem = QTableWidgetItem()
         __qtablewidgetitem.setFont(font1);
         self.tab_estoque.setHorizontalHeaderItem(0, __qtablewidgetitem)
         font2 = QFont()
-        font2.setFamily(u"Courier")
+        font2.setFamily(u"Century")
         font2.setPointSize(6)
         __qtablewidgetitem1 = QTableWidgetItem()
         __qtablewidgetitem1.setFont(font2);
@@ -94,11 +131,22 @@ class Ui_MainWindow(object):
         __qtablewidgetitem4.setFont(font1);
         self.tab_estoque.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         self.tab_estoque.setObjectName(u"tab_estoque")
+        sizePolicy.setHeightForWidth(self.tab_estoque.sizePolicy().hasHeightForWidth())
+        self.tab_estoque.setSizePolicy(sizePolicy)
+        font3 = QFont()
+        font3.setFamily(u"Century")
+        font3.setPointSize(10)
+        self.tab_estoque.setFont(font3)
+        self.tab_estoque.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.tab_estoque.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.tab_estoque.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
+        self.tab_estoque.setShowGrid(True)
+        self.tab_estoque.setSortingEnabled(False)
 
-        self.verticalLayout_4.addWidget(self.tab_estoque)
+        self.verticalLayout.addWidget(self.tab_estoque)
 
 
-        self.verticalLayout_3.addWidget(self.frame_3)
+        self.horizontalLayout_4.addWidget(self.frame_3)
 
         self.Paginas.addWidget(self.pag_Estoque)
         self.pag_addAlim = QWidget()
@@ -121,10 +169,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_8.setObjectName(u"verticalLayout_8")
         self.label_2 = QLabel(self.frame_5)
         self.label_2.setObjectName(u"label_2")
-        font3 = QFont()
-        font3.setFamily(u"Courier New")
-        font3.setPointSize(15)
-        self.label_2.setFont(font3)
+        self.label_2.setFont(font)
+        self.label_2.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_8.addWidget(self.label_2)
 
@@ -137,7 +183,7 @@ class Ui_MainWindow(object):
         self.label_3 = QLabel(self.frame_6)
         self.label_3.setObjectName(u"label_3")
         font4 = QFont()
-        font4.setFamily(u"Courier New")
+        font4.setFamily(u"Century")
         self.label_3.setFont(font4)
 
         self.verticalLayout_7.addWidget(self.label_3)
@@ -195,7 +241,7 @@ class Ui_MainWindow(object):
         self.btn_adicionaAlim.setObjectName(u"btn_adicionaAlim")
         self.btn_adicionaAlim.clicked.connect(lambda: action.addAlimento(self.ent_codAlim.text(), self.ent_nomeAlim.text(),self.ent_qAtual.text(),self.ent_qMin.text(), self.ent_qMax.text()))
         font5 = QFont()
-        font5.setFamily(u"Courier New")
+        font5.setFamily(u"Century")
         font5.setBold(True)
         font5.setWeight(75)
         self.btn_adicionaAlim.setFont(font5)
@@ -212,13 +258,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.addWidget(self.frame_4)
 
         self.Paginas.addWidget(self.pag_addAlim)
-        self.pag_contabilizando = QWidget()
-        self.pag_contabilizando.setObjectName(u"pag_contabilizando")
-        sizePolicy.setHeightForWidth(self.pag_contabilizando.sizePolicy().hasHeightForWidth())
-        self.pag_contabilizando.setSizePolicy(sizePolicy)
-        self.verticalLayout_9 = QVBoxLayout(self.pag_contabilizando)
+        self.pag_atualizando = QWidget()
+        self.pag_atualizando.setObjectName(u"pag_atualizando")
+        sizePolicy.setHeightForWidth(self.pag_atualizando.sizePolicy().hasHeightForWidth())
+        self.pag_atualizando.setSizePolicy(sizePolicy)
+        self.verticalLayout_9 = QVBoxLayout(self.pag_atualizando)
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.frame_7 = QFrame(self.pag_contabilizando)
+        self.frame_7 = QFrame(self.pag_atualizando)
         self.frame_7.setObjectName(u"frame_7")
         self.frame_7.setFrameShape(QFrame.StyledPanel)
         self.frame_7.setFrameShadow(QFrame.Raised)
@@ -239,9 +285,10 @@ class Ui_MainWindow(object):
         self.label_8 = QLabel(self.frame_8)
         self.label_8.setObjectName(u"label_8")
         font6 = QFont()
-        font6.setFamily(u"Courier New")
+        font6.setFamily(u"Century")
         font6.setPointSize(13)
         self.label_8.setFont(font6)
+        self.label_8.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_13.addWidget(self.label_8)
 
@@ -254,36 +301,47 @@ class Ui_MainWindow(object):
         self.frame_10.setSizePolicy(sizePolicy1)
         self.frame_10.setFrameShape(QFrame.StyledPanel)
         self.frame_10.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_10 = QVBoxLayout(self.frame_10)
-        self.verticalLayout_10.setObjectName(u"verticalLayout_10")
+        self.verticalLayout_4 = QVBoxLayout(self.frame_10)
+        self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.label_9 = QLabel(self.frame_10)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setFont(font4)
 
-        self.verticalLayout_10.addWidget(self.label_9)
+        self.verticalLayout_4.addWidget(self.label_9)
 
-        self.ent_prato = QLineEdit(self.frame_10)
-        self.ent_prato.setObjectName(u"ent_prato")
+        self.ent_codA = QLineEdit(self.frame_10)
+        self.ent_codA.setObjectName(u"ent_codA")
 
-        self.verticalLayout_10.addWidget(self.ent_prato)
+        self.verticalLayout_4.addWidget(self.ent_codA)
 
         self.label_10 = QLabel(self.frame_10)
         self.label_10.setObjectName(u"label_10")
         self.label_10.setFont(font4)
 
-        self.verticalLayout_10.addWidget(self.label_10)
+        self.verticalLayout_4.addWidget(self.label_10)
 
-        self.ent_qPratos = QLineEdit(self.frame_10)
-        self.ent_qPratos.setObjectName(u"ent_qPratos")
+        self.ent_quant = QLineEdit(self.frame_10)
+        self.ent_quant.setObjectName(u"ent_quant")
 
-        self.verticalLayout_10.addWidget(self.ent_qPratos)
+        self.verticalLayout_4.addWidget(self.ent_quant)
 
-        self.btn_contabilizar = QPushButton(self.frame_10)
-        self.btn_contabilizar.setObjectName(u"btn_contabilizar")
-        self.btn_contabilizar.clicked.connect(lambda: action.contabilizarGastos(self.ent_prato.text(), self.ent_qPratos.text()))
-        self.btn_contabilizar.setFont(font5)
+        self.btn_aumentar = QPushButton(self.frame_10)
+        self.btn_aumentar.setObjectName(u"btn_aumentar")
+        self.btn_aumentar.clicked.connect(lambda: action.Aumentar(self.ent_codA.text(),self.ent_quant.text()))
+        self.btn_aumentar.setFont(font4)
 
-        self.verticalLayout_10.addWidget(self.btn_contabilizar)
+        self.verticalLayout_4.addWidget(self.btn_aumentar)
+
+        self.btn_diminuir = QPushButton(self.frame_10)
+        self.btn_diminuir.setObjectName(u"btn_diminuir")
+        self.btn_diminuir.clicked.connect(lambda: action.Diminuir(self.ent_codA.text(),self.ent_quant.text()))
+        font7 = QFont()
+        font7.setFamily(u"Century")
+        font7.setBold(False)
+        font7.setWeight(50)
+        self.btn_diminuir.setFont(font7)
+
+        self.verticalLayout_4.addWidget(self.btn_diminuir)
 
 
         self.verticalLayout_13.addWidget(self.frame_10)
@@ -297,7 +355,7 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.frame_7)
 
-        self.Paginas.addWidget(self.pag_contabilizando)
+        self.Paginas.addWidget(self.pag_atualizando)
         self.pag_excluirAlim = QWidget()
         self.pag_excluirAlim.setObjectName(u"pag_excluirAlim")
         sizePolicy.setHeightForWidth(self.pag_excluirAlim.sizePolicy().hasHeightForWidth())
@@ -318,10 +376,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
         self.label_11 = QLabel(self.frame_12)
         self.label_11.setObjectName(u"label_11")
-        font7 = QFont()
-        font7.setFamily(u"Courier New")
-        font7.setPointSize(12)
-        self.label_11.setFont(font7)
+        font8 = QFont()
+        font8.setFamily(u"Century")
+        font8.setPointSize(12)
+        self.label_11.setFont(font8)
+        self.label_11.setTextFormat(Qt.AutoText)
+        self.label_11.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_16.addWidget(self.label_11)
 
@@ -359,7 +419,12 @@ class Ui_MainWindow(object):
         self.btn_excluir = QPushButton(self.frame_13)
         self.btn_excluir.setObjectName(u"btn_excluir")
         self.btn_excluir.clicked.connect(lambda: action.excluirAlimento(self.exc_codAlim.text(),self.exc_nomeAlim.text()))
-        self.btn_excluir.setFont(font5)
+
+        font9 = QFont()
+        font9.setFamily(u"Courier New")
+        font9.setBold(True)
+        font9.setWeight(75)
+        self.btn_excluir.setFont(font9)
 
         self.verticalLayout_17.addWidget(self.btn_excluir)
 
@@ -371,7 +436,7 @@ class Ui_MainWindow(object):
 
         self.Paginas.addWidget(self.pag_excluirAlim)
 
-        self.verticalLayout.addWidget(self.Paginas)
+        self.verticalLayout_3.addWidget(self.Paginas)
 
         self.Botoes = QFrame(self.frame)
         self.Botoes.setObjectName(u"Botoes")
@@ -384,47 +449,47 @@ class Ui_MainWindow(object):
         self.btn_addAlim = QPushButton(self.Botoes)
         self.btn_addAlim.setObjectName(u"btn_addAlim")
         self.btn_addAlim.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_addAlim))
-        font8 = QFont()
-        font8.setFamily(u"Courier New")
-        font8.setPointSize(6)
-        font8.setBold(True)
-        font8.setWeight(75)
-        self.btn_addAlim.setFont(font8)
+        font10 = QFont()
+        font10.setFamily(u"Century")
+        font10.setPointSize(8)
+        font10.setBold(False)
+        font10.setWeight(50)
+        self.btn_addAlim.setFont(font10)
 
         self.horizontalLayout.addWidget(self.btn_addAlim)
 
         self.btn_ExcluirAlim = QPushButton(self.Botoes)
         self.btn_ExcluirAlim.setObjectName(u"btn_ExcluirAlim")
         self.btn_ExcluirAlim.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_excluirAlim))
-        font9 = QFont()
-        font9.setFamily(u"Courier New")
-        font9.setPointSize(6)
-        font9.setBold(True)
-        font9.setItalic(False)
-        font9.setWeight(75)
-        self.btn_ExcluirAlim.setFont(font9)
+        font11 = QFont()
+        font11.setFamily(u"Century")
+        font11.setPointSize(8)
+        font11.setBold(False)
+        font11.setItalic(False)
+        font11.setWeight(50)
+        self.btn_ExcluirAlim.setFont(font11)
 
         self.horizontalLayout.addWidget(self.btn_ExcluirAlim)
 
-        self.btn_contGastos = QPushButton(self.Botoes)
-        self.btn_contGastos.setObjectName(u"btn_contGastos")
-        self.btn_contGastos.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_contabilizando))
-        self.btn_contGastos.setFont(font8)
+        self.btn_Atualizar = QPushButton(self.Botoes)
+        self.btn_Atualizar.setObjectName(u"btn_Atualizar")
+        self.btn_Atualizar.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_atualizando))
+        self.btn_Atualizar.setFont(font10)
 
-        self.horizontalLayout.addWidget(self.btn_contGastos)
+        self.horizontalLayout.addWidget(self.btn_Atualizar)
 
         self.btn_visualizar = QPushButton(self.Botoes)
         self.btn_visualizar.setObjectName(u"btn_visualizar")
         self.btn_visualizar.clicked.connect(lambda: self.Paginas.setCurrentWidget(self.pag_Estoque))
-        self.btn_visualizar.setFont(font8)
+        self.btn_visualizar.setFont(font10)
 
         self.horizontalLayout.addWidget(self.btn_visualizar)
 
 
-        self.verticalLayout.addWidget(self.Botoes)
+        self.verticalLayout_3.addWidget(self.Botoes)
 
 
-        self.verticalLayout_2.addWidget(self.frame)
+        self.horizontalLayout_2.addWidget(self.frame)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -456,17 +521,18 @@ class Ui_MainWindow(object):
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"Quantidade M\u00ednima", None))
         self.label_7.setText(QCoreApplication.translate("MainWindow", u"Quantidade M\u00e1xima", None))
         self.btn_adicionaAlim.setText(QCoreApplication.translate("MainWindow", u"Adicionar", None))
-        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Contabilizando gastos no Estoque", None))
-        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Prato vendido", None))
-        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Quantidade de pratos", None))
-        self.btn_contabilizar.setText(QCoreApplication.translate("MainWindow", u"Contabilizar", None))
+        self.label_8.setText(QCoreApplication.translate("MainWindow", u"Atualizando a quantidade no Estoque", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"C\u00f3digo do alimento", None))
+        self.label_10.setText(QCoreApplication.translate("MainWindow", u"Quantidade", None))
+        self.btn_aumentar.setText(QCoreApplication.translate("MainWindow", u"Aumentar", None))
+        self.btn_diminuir.setText(QCoreApplication.translate("MainWindow", u"Diminuir", None))
         self.label_11.setText(QCoreApplication.translate("MainWindow", u"Excluir alimento do Estoque", None))
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"C\u00f3digo do alimento", None))
         self.label_13.setText(QCoreApplication.translate("MainWindow", u"Nome", None))
         self.btn_excluir.setText(QCoreApplication.translate("MainWindow", u"Excluir", None))
         self.btn_addAlim.setText(QCoreApplication.translate("MainWindow", u"Adicionar novo alimento", None))
         self.btn_ExcluirAlim.setText(QCoreApplication.translate("MainWindow", u"Excluir alimento", None))
-        self.btn_contGastos.setText(QCoreApplication.translate("MainWindow", u"Contabilizar os gastos", None))
+        self.btn_Atualizar.setText(QCoreApplication.translate("MainWindow", u"Atualizar Estoque", None))
         self.btn_visualizar.setText(QCoreApplication.translate("MainWindow", u"Visualizar Estoque", None))
     # retranslateUi
 
