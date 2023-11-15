@@ -9,9 +9,8 @@ itens = Table('itens', metadata,
     Column('id', Integer, primary_key=True, autoincrement=True),
     Column('nome', String, nullable=False),
     Column('quantidade', Integer, nullable=False),
-    Column('categoria', Enum('Eletrônico', 'Decoração', 'Eletrodoméstico', ''), nullable=False)
+    Column('categoria', Enum('Fones de ouvido', 'Notebook', 'CPU', 'Memória', 'SSD/HD', 'Celular', 'Película', 'Placa de video', 'Fonte'), nullable=False)
 )
-
 
 # Modelo da tabela de histórico
 historico = Table('historico', metadata,
